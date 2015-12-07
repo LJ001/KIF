@@ -751,7 +751,9 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     NSLog(@"Hit view: %@",hitView);
     if ([self isTappableWithHitTestResultView:hitView]) {
         NSLog(@"Is tappable with hit test result view");
-        return [self.window convertPoint:tapPoint toView:self];
+        CGPoint converted = [self.window convertPoint:tapPoint toView:self];
+        NSLog(@"Converted point = %@",NSStringFromCGPoint(converted));
+        return converted;
     }
     
     // Top left
