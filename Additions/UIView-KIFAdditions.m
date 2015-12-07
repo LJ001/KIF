@@ -709,6 +709,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
 
 - (BOOL)isTappableInRect:(CGRect)rect;
 {
+    NSLog(@"Rect = %@",NSStringFromCGRect(rect));
     CGPoint tappablePoint = [self tappablePointInRect:rect];
     
     return !isnan(tappablePoint.x);
@@ -745,13 +746,20 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     // Mid point
     tapPoint = CGPointCenteredInRect(frame);
     hitView = [self.window hitTest:tapPoint withEvent:nil];
+    NSLog(@"Mid point");
+    NSLog(@"Tap point: %@",NSStringFromCGPoint(tapPoint));
+    NSLog(@"Hit view: %@",hitView);
     if ([self isTappableWithHitTestResultView:hitView]) {
+        NSLog(@"Is tappable with hit test result view");
         return [self.window convertPoint:tapPoint toView:self];
     }
     
     // Top left
     tapPoint = CGPointMake(frame.origin.x + 1.0f, frame.origin.y + 1.0f);
     hitView = [self.window hitTest:tapPoint withEvent:nil];
+    NSLog(@"Top Left point");
+    NSLog(@"Tap point: %@",NSStringFromCGPoint(tapPoint));
+    NSLog(@"Hit view: %@",hitView);
     if ([self isTappableWithHitTestResultView:hitView]) {
         return [self.window convertPoint:tapPoint toView:self];
     }
@@ -759,6 +767,9 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     // Top right
     tapPoint = CGPointMake(frame.origin.x + frame.size.width - 1.0f, frame.origin.y + 1.0f);
     hitView = [self.window hitTest:tapPoint withEvent:nil];
+    NSLog(@"Top Right point");
+    NSLog(@"Tap point: %@",NSStringFromCGPoint(tapPoint));
+    NSLog(@"Hit view: %@",hitView);
     if ([self isTappableWithHitTestResultView:hitView]) {
         return [self.window convertPoint:tapPoint toView:self];
     }
@@ -766,6 +777,9 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     // Bottom left
     tapPoint = CGPointMake(frame.origin.x + 1.0f, frame.origin.y + frame.size.height - 1.0f);
     hitView = [self.window hitTest:tapPoint withEvent:nil];
+    NSLog(@"Bottom left point");
+    NSLog(@"Tap point: %@",NSStringFromCGPoint(tapPoint));
+    NSLog(@"Hit view: %@",hitView);
     if ([self isTappableWithHitTestResultView:hitView]) {
         return [self.window convertPoint:tapPoint toView:self];
     }
@@ -773,9 +787,14 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     // Bottom right
     tapPoint = CGPointMake(frame.origin.x + frame.size.width - 1.0f, frame.origin.y + frame.size.height - 1.0f);
     hitView = [self.window hitTest:tapPoint withEvent:nil];
+    NSLog(@"Bottom right point");
+    NSLog(@"Tap point: %@",NSStringFromCGPoint(tapPoint));
+    NSLog(@"Hit view: %@",hitView);
     if ([self isTappableWithHitTestResultView:hitView]) {
         return [self.window convertPoint:tapPoint toView:self];
     }
+    
+    NSLog(@"Doing nan point");
     
     return CGPointMake(NAN, NAN);
 }
