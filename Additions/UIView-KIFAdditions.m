@@ -684,6 +684,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
 // Is this view currently on screen?
 - (BOOL)isTappable;
 {
+    NSLog(@"Is tappable called on: %@ tag: %i",self,self.tag);
     return ([self hasTapGestureRecognizer] ||
             [self isTappableInRect:self.bounds]);
 }
